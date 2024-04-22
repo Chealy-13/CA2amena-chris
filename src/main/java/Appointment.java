@@ -1,6 +1,6 @@
 import java.time.LocalDate;
 
-public class Appointment {
+public class Appointment implements Comparable<Appointment>{
     private String firstName;
     private String lastName;
     private LocalDate dob;
@@ -143,4 +143,40 @@ public class Appointment {
      *
      * @return String representation of the object
      */
+
+    @Override
+    public String toString() {
+        return "Appointment{" + "firstName=" + firstName + ", lastName=" + lastName + ", dob=" + dob + ", issue=" + issue + ", triageLvl=" + triageLvl + ", docName=" + docName + '}';
+    }
+
+    /**
+     * Compares this object to a particular object to see if equal
+     * @param o, object to compare with
+     * @return boolean, true if object equals specified object, false otherwise
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Appointment)) {
+            return false;
+        }
+        Appointment appointment = (Appointment) o;
+        return triageLvl == appointment.triageLvl &&
+                firstName.equals(appointment.firstName) &&
+                lastName.equals(appointment.lastName) &&
+                dob.equals(appointment.dob) &&
+                issue.equals(appointment.issue) &&
+                docName.equals(appointment.docName);
+    }
+
+    @Override
+    public int compareTo(Appointment other) {
+        if (this.triageLvl != other.triageLvl) {
+            return Integer.compare(this.triageLvl, other.triageLvl);
+        } else {
+            return this.dob.compareTo(other.dob);
+        }
+    }
 }
