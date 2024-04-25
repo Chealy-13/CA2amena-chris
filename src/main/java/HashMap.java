@@ -6,17 +6,32 @@ public class HashMap {
     private final LinkedList<Entry>[] map;
     private int count;
 
+    /**
+     * constructs an empty HashMap with an initial capacity of 103
+     */
     public HashMap(){
         map = new LinkedList[103];
         count = 0;
     }
 
+    /**
+     * gets the hash value for a specified key using the hashCode method of the PatientId object
+     * the hash value used to fit within the size of the map using modulus
+     * @param key the key to be turned into the hash value
+     * @return the hash value
+     */
     private int hashFunction(PatientId key){
         int slot = Math.abs(key.hashCode());
         slot = slot % map.length;
         return slot;
     }
 
+    /**
+     * removes the entry with the specified key from the map
+     * @param key the key of the entry to be removed
+     * @return the value of the removed entry,
+     * or null if no entry with the specified key is found
+     */
     public Patient remove(PatientId key){
         int slot = hashFunction(key);
         LinkedList<Entry> list = map[slot];
@@ -36,6 +51,12 @@ public class HashMap {
         return null;
     }
 
+    /**
+     * returns the value of the key given, or null if this map does not have match for the key
+     * @param key the key used to find the value
+     * @return the value of the key given, or null if this map does not have match for the key
+     * @throws IllegalArgumentException if the key is null
+     */
     public Patient get(PatientId key){
         // VALIDATION!!!
         if(key == null){
@@ -57,6 +78,13 @@ public class HashMap {
         return null;
     }
 
+    /**
+     * adds a value to the key given in the map,
+     * if key given already has a value in map this will overwrite it and return old value
+     * @param key the key to add a value to
+     * @param value the value to be added to key
+     * @return the old value with the same key or null if no match for the key in the map
+     */
     public Patient put(PatientId key, Patient value){
         int slot = hashFunction(key);
         if(map[slot] == null){
