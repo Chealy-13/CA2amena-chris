@@ -36,6 +36,27 @@ public class HashMap {
         return null;
     }
 
+    public Patient get(PatientId key){
+        // VALIDATION!!!
+        if(key == null){
+            throw new IllegalArgumentException("Null cannot be used as a key");
+        }
+        if(count == 0){
+            return null;
+        }
+
+        int slot = hashFunction(key);
+        if(map[slot] == null){
+            return null;
+        }
+        for(Entry e: map[slot]) {
+            if (e.key.equals(key))
+                return e.value;
+        }
+
+        return null;
+    }
+
     public Patient put(PatientId key, Patient value){
         int slot = hashFunction(key);
         if(map[slot] == null){
