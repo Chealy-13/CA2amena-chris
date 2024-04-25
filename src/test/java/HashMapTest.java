@@ -6,10 +6,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class HashMapTest {
 
+    /**
+     * Tests the remove method of the HashMap class.
+     */
     @Test
     void remove() {
         HashMap map = new HashMap();
-        LocalDate dob = LocalDate.of(1990, 5, 15);
+        LocalDate dob = LocalDate.of(2001, 4, 14);
         PatientId key1 = new PatientId("John", "Doe", dob);
         Patient patient1 = new Patient("John", "Doe", dob, LocalDate.now());
         //testing to check calling remove on an empty map returns null
@@ -21,10 +24,13 @@ class HashMapTest {
         assertEquals(null, map.get(key1));
     }
 
+    /**
+     * Tests the put method of the HashMap class.
+     */
     @Test
     void put() {
         HashMap map = new HashMap();
-        LocalDate dob1 = LocalDate.of(1990, 5, 15);
+        LocalDate dob1 = LocalDate.of(2001, 4, 14);
         PatientId key1 = new PatientId("John", "Doe", dob1);
         Patient patient1 = new Patient("John", "Doe", dob1, LocalDate.now());
         //testing put should return null for first time entering this key
@@ -37,10 +43,13 @@ class HashMapTest {
         assertEquals(updatedPatient, map.get(key1));
     }
 
+    /**
+     * Tests the get method of the HashMap class.
+     */
     @Test
     void get() {
         HashMap map = new HashMap();
-        LocalDate dob1 = LocalDate.of(1990, 5, 15);
+        LocalDate dob1 = LocalDate.of(2001, 4, 14);
         PatientId key1 = new PatientId("John", "Doe", dob1);
         Patient patient1 = new Patient("John", "Doe", dob1, LocalDate.now());
 
@@ -52,7 +61,7 @@ class HashMapTest {
         assertEquals(patient1, map.get(key1));
 
         //testing if key is wrong/does not exist
-        LocalDate dob2 = LocalDate.of(1985, 8, 20);
+        LocalDate dob2 = LocalDate.of(1999, 3, 10);
         PatientId key2 = new PatientId("Billy", "joel", dob2);
         assertEquals(null, map.get(key2));
 
