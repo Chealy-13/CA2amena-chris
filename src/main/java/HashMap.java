@@ -17,26 +17,24 @@ public class HashMap {
         return slot;
     }
 
-//    public Patient remove(String key){
-//        int slot = hashFunction(key);
-//        LinkedList<Entry> list = map[slot];
-//        if(list == null){
-//            return null;
-//        }
-//        for(Entry e: map[slot]) {
-//            if (!e.key.equals(key))
-//                return null;
-//        }
-////        if(!map[slot].key.equals(key)){
-////            return null;
-////        }
-//
-//        String toBeDeleted = map[slot].value;
-//        // Set the stored value to null
-//        map[slot].value = null;
-//        // Return the copy of the stored value
-//        return toBeDeleted;
-//    }
+    public String remove(String key){
+        int slot = hashFunction(key);
+        LinkedList<Entry> list = map[slot];
+        if(list == null){
+            return null;
+        }
+        for(Entry e: map[slot]) {
+            if (e.key.equals(key)){
+                String toBeDeleted = e.value;
+                // Set the stored value to null
+                e.value = null;
+                // Return the copy of the stored value
+                return toBeDeleted;
+            }
+
+        }
+        return null;
+    }
 
 
     private static class Entry{
@@ -47,5 +45,7 @@ public class HashMap {
             this.key = key;
             this.value = value;
         }
+
     }
+
 }
