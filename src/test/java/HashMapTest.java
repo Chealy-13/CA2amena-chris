@@ -20,4 +20,20 @@ class HashMapTest {
         assertEquals(patient1, removedPatient);
         assertEquals(null, map.get(key1));
     }
+
+    @Test
+    void put() {
+        HashMap map = new HashMap();
+        LocalDate dob1 = LocalDate.of(1990, 5, 15);
+        PatientId key1 = new PatientId("John", "Doe", dob1);
+        Patient patient1 = new Patient("John", "Doe", dob1, LocalDate.now());
+        //testing put should return null for first time entering this key
+        assertEquals(null, map.put(key1, patient1));
+        //updating patient  and trying to add it with the same key
+        Patient updatedPatient = new Patient("Billy", "Updated Doe", dob1, LocalDate.now());
+        //should replace old value and return it
+        assertEquals(patient1, map.put(key1, updatedPatient));
+        //double check value was updted
+        assertEquals(updatedPatient, map.get(key1));
+    }
 }
