@@ -11,13 +11,13 @@ public class HashMap {
         count = 0;
     }
 
-    private int hashFunction(String key){
+    private int hashFunction(PatientId key){
         int slot = Math.abs(key.hashCode());
         slot = slot % map.length;
         return slot;
     }
 
-    public String remove(String key){
+    public Patient remove(PatientId key){
         int slot = hashFunction(key);
         LinkedList<Entry> list = map[slot];
         if(list == null){
@@ -25,7 +25,7 @@ public class HashMap {
         }
         for(Entry e: map[slot]) {
             if (e.key.equals(key)){
-                String toBeDeleted = e.value;
+                Patient toBeDeleted = e.value;
                 // Set the stored value to null
                 e.value = null;
                 // Return the copy of the stored value
@@ -38,10 +38,10 @@ public class HashMap {
 
 
     private static class Entry{
-        protected String key;
-        protected String value;
+        protected PatientId key;
+        protected Patient value;
 
-        public Entry(String key, String value){
+        public Entry(PatientId key, Patient value){
             this.key = key;
             this.value = value;
         }
