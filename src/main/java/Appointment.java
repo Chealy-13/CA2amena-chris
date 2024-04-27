@@ -142,7 +142,14 @@ public class Appointment implements Comparable<Appointment>{
      * Gets the Appointment object displayed as a string
      *
      * @return String representation of the object
+     *
      */
+    private Appointment getFirst() {
+        return null;
+    }
+    public LocalDate getDate() {
+        return dob;
+    }
 
     @Override
     public String toString() {
