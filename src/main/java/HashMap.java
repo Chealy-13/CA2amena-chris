@@ -106,6 +106,26 @@ public class HashMap {
         return null;
     }
 
+    /**
+     * checks if the specified key is in the HashMap.
+     * @param key the key to be tested
+     * @return true if the HashMap contains the specified key, false otherwise
+     * @throws IllegalArgumentException if the key is null
+     */
+    public boolean containsKey(PatientId key) {
+        int slot = hashFunction(key);
+        LinkedList<Entry> list = map[slot];
+        if (list == null) {
+            return false;
+        }
+        for (Entry e : list) {
+            if (e.key.equals(key)) {
+                return true; // Found the key
+            }
+        }
+        return false; // Key not found
+    }
+
 
     private static class Entry{
         protected PatientId key;
