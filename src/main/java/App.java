@@ -1,11 +1,14 @@
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Scanner;
 public class App {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        HashMap patients = new HashMap();
 
 //Write a program that asks the user for:
 //• The upper bound to put on the queue.
+        //ToDo fix upperbound as it does not matter what number it is atm
         System.out.println("Enter the upper bound of the queue");
         int upperBound = sc.nextInt();
         sc.nextLine();
@@ -26,7 +29,7 @@ public class App {
 //        Once the program has finished the set up stage, it should repeatedly allow the user choose from the following options:
         boolean exit = false;
         while (!exit) {
-            //to do add exception handling for wrong inputs.ie not inputting a number
+            //todo add exception handling for wrong inputs.ie not inputting a number
 
             System.out.println("\nChoose an option:");
             System.out.println("1. Add a new patient");
@@ -42,6 +45,25 @@ public class App {
                 case 1:
                     //• Add a new patient to the practice (where there is already a patient with that first name, last name and date of birth, the
                     //user should be informed and the patient should not be added).
+                    System.out.println("Enter the following details of the patient you would like to add:");
+                    System.out.print("First Name: ");
+                    String fName = sc.nextLine();
+                    System.out.print("Last Name: ");
+                    String sName = sc.nextLine();
+                    System.out.print("Date of Birth(yyyy-mm-dd): ");
+                    LocalDate dob = LocalDate.parse(sc.next());
+                    LocalDate joinDate = LocalDate.now();
+
+                    PatientId key = new PatientId(fName, sName, dob);
+
+                    // check if the patient already exists in the HashMap
+                    if (patients.containsKey(key)) {
+                        System.out.println("Patient already exists");
+                    } else {
+                        Patient newPatient = new Patient(fName, sName, dob, joinDate);
+                        patients.put(key, newPatient);
+                        System.out.println("Patient added successfully.");
+                    }
                     break;
                 case 2:
                     //• Delete a patient from the practice (you should handle any outstanding appointments appropriately – this may require
