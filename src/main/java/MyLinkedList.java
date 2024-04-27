@@ -1,8 +1,5 @@
-import java.time.LocalDate;
-
-
-public class MyLinkedList {
-    private Node head;
+public abstract class MyLinkedList {
+    Node head;
     private Node tail;
     private int numElements;
     private static final int MAX_SIZE = 10;
@@ -17,11 +14,13 @@ public class MyLinkedList {
         return numElements;
     }
 
+    public abstract boolean add(Appointment appointment);
+
     public boolean isEmpty() {
         return numElements == 0;
     }
 
-    public boolean add(Appointment appointment) {
+    public boolean add(int position, Appointment appointment) {
         if (numElements >= MAX_SIZE) {
             return false;  // List is full
         }
@@ -52,9 +51,9 @@ public class MyLinkedList {
         return tail != null ? tail.data : null;
     }
 
-    private class Node {
-        private Appointment data;
-        private Node next;
+    class Node {
+        Appointment data;
+        Node next;
 
         public Node(Appointment data) {
             this.data = data;
