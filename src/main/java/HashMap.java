@@ -126,6 +126,14 @@ public class HashMap {
         return false; // Key not found
     }
 
+    /**
+     * returns the size of something.
+     * @return count, the size
+     */
+    public int size() {
+        return count;
+    }
+
 
     private static class Entry{
         protected PatientId key;
