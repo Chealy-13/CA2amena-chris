@@ -55,6 +55,7 @@ public class App {
                     LocalDate joinDate = LocalDate.now();
 
                     PatientId key = new PatientId(fName, sName, dob);
+//                    Patient patient = new Patient(fName, sName, dob, joinDate);
 
                     // check if the patient already exists in the HashMap
                     if (patients.containsKey(key)) {
@@ -68,6 +69,25 @@ public class App {
                 case 2:
                     //• Delete a patient from the practice (you should handle any outstanding appointments appropriately – this may require
                     //adding an extra method to your queue outside the standard functionality)
+                    System.out.println("Enter the following details of the patient you would like to delete:");
+                    System.out.print("First Name: ");
+                    fName = sc.nextLine();
+                    System.out.print("Last Name: ");
+                    sName = sc.nextLine();
+                    System.out.print("Date of Birth(yyyy-mm-dd): ");
+                    dob = LocalDate.parse(sc.next());
+//                    System.out.print("Join date(yyyy-mm-dd): ");
+//                    joinDate = LocalDate.parse(sc.next());
+
+                    PatientId keyToDelete = new PatientId(fName, sName, dob);
+
+                    // check if the patient already exists in the HashMap
+                    if (patients.containsKey(keyToDelete)) {
+                        patients.remove(keyToDelete);
+                        System.out.println("Patient "+keyToDelete+" has beem deleted");
+                    } else {
+                        System.out.println("Patient does not exist with those details please try again.");
+                    }
                     break;
                 case 3:
                     //• Display all patients
