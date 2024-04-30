@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Appointment implements Comparable<Appointment>{
     private String firstName;
@@ -13,8 +14,10 @@ public class Appointment implements Comparable<Appointment>{
      *
      * All strings will be empty, date will be set to current date, int will be 0
      */
-    public Appointment(String john, String doe, LocalDate now, String checkup, LocalDate nowed, int i, String s) {
+    public Appointment(String docName, LocalDate dob, int triageLvl) {
+        this("", "", dob, "", triageLvl, docName);
     }
+
 
     /**
      * Constructs a new Appointment object with specific fields
@@ -108,7 +111,7 @@ public class Appointment implements Comparable<Appointment>{
      * @return pDob, the updated date of birth for patient
      */
     public void setDob(LocalDate pDOB) {
-        this.dob = dob;
+        this.dob =  pDOB;
     }
 
     /**
@@ -163,20 +166,22 @@ public class Appointment implements Comparable<Appointment>{
      */
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof Appointment)) {
-            return false;
-        }
-        Appointment appointment = (Appointment) o;
-        return triageLvl == appointment.triageLvl &&
-                firstName.equals(appointment.firstName) &&
-                lastName.equals(appointment.lastName) &&
-                dob.equals(appointment.dob) &&
-                issue.equals(appointment.issue) &&
-                docName.equals(appointment.docName);
+        if (this == o) return true;
+        if (!(o instanceof Appointment)) return false;
+        Appointment that = (Appointment) o;
+        return triageLvl == that.triageLvl &&
+                Objects.equals(firstName, that.firstName) &&
+                Objects.equals(lastName, that.lastName) &&
+                Objects.equals(dob, that.dob) &&
+                Objects.equals(issue, that.issue) &&
+                Objects.equals(docName, that.docName);
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName, lastName, dob, issue, triageLvl, docName);
+    }
+
 
     @Override
     public int compareTo(Appointment other) {

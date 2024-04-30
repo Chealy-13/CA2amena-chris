@@ -1,11 +1,8 @@
-import java.util.*;
-import java.time.LocalDate;
-
 public class BoundedPriorityQueue extends MyLinkedList {
     private int capacity;
     private String docName;
 
-    public BoundedPriorityQueue(int capacity, String docName) {
+    protected BoundedPriorityQueue(int capacity, String docName) {
         this.capacity = capacity;
         this.docName = docName.toLowerCase(); // Normalize the doctor's name for case-insensitive comparison
     }
@@ -19,7 +16,7 @@ public class BoundedPriorityQueue extends MyLinkedList {
 
     @Override
     public boolean add(Appointment appointment) {
-        if (size() >= capacity || !appointment.getDocName().equalsIgnoreCase(docName)) {
+        if ((size() >= capacity) || !appointment.getDocName().equalsIgnoreCase(docName)) {
             return false;  // Fail fast if the queue is full or the appointment is for a different doctor
         }
         int newPosition = calcPosition(appointment);
@@ -34,7 +31,9 @@ public class BoundedPriorityQueue extends MyLinkedList {
 
 
     public boolean offer(Appointment appointment, int position) {
-        if (isFull() || !appointment.getDocName().equalsIgnoreCase(docName)) {
+        if (isFull()) {
+            return false;
+        } else if (!appointment.getDocName().equalsIgnoreCase(docName)) {
             return false;
         }
         return add(position, appointment);
@@ -55,7 +54,7 @@ public class BoundedPriorityQueue extends MyLinkedList {
         if (isEmpty()) {
             return null;
         }
-        return removeFirst(); // Assuming removeFirst() removes and returns the head of the list
+        return removeFirst();
     }
     /**
      * Checks if the queue is empty
@@ -112,7 +111,7 @@ public class BoundedPriorityQueue extends MyLinkedList {
         if (isEmpty()) {
             return null;
         }
-        return getHeadData(); // Assuming a method getHeadData() retrieves the data of the head node
+        return getHeadData();
     }
 
     /**
