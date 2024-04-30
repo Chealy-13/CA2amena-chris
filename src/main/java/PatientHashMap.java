@@ -1,4 +1,5 @@
 import java.util.LinkedList;
+import java.util.List;
 
 public class PatientHashMap {
     // Set up base internal map/array
@@ -134,8 +135,20 @@ public class PatientHashMap {
         return count;
     }
 
+    public LinkedList<Entry> getEntries(){
+        LinkedList<Entry> list = new LinkedList<Entry>();
+        for (LinkedList<Entry> entryLinkedList : map) {
+            if(entryLinkedList != null){
+                list.addAll(entryLinkedList);
+            }
 
-    private static class Entry{
+        }
+        return list;
+
+    }
+
+
+    public static class Entry{
         protected PatientId key;
         protected Patient value;
 
