@@ -5,14 +5,14 @@ import java.time.LocalDate;
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class HashMapTest {
+class PatientHashMapTest {
 
     /**
      * Tests the remove method of the HashMap class.
      */
     @Test
     void remove() {
-        HashMap map = new HashMap();
+        PatientHashMap map = new PatientHashMap();
         LocalDate dob = LocalDate.of(2001, 4, 14);
         PatientId key1 = new PatientId("John", "Doe", dob);
         Patient patient1 = new Patient("John", "Doe", dob, LocalDate.now());
@@ -30,7 +30,7 @@ class HashMapTest {
      */
     @Test
     void put() {
-        HashMap map = new HashMap();
+        PatientHashMap map = new PatientHashMap();
         LocalDate dob1 = LocalDate.of(2001, 4, 14);
         PatientId key1 = new PatientId("John", "Doe", dob1);
         Patient patient1 = new Patient("John", "Doe", dob1, LocalDate.now());
@@ -49,7 +49,7 @@ class HashMapTest {
      */
     @Test
     void get() {
-        HashMap map = new HashMap();
+        PatientHashMap map = new PatientHashMap();
         LocalDate dob1 = LocalDate.of(2001, 4, 14);
         PatientId key1 = new PatientId("John", "Doe", dob1);
         Patient patient1 = new Patient("John", "Doe", dob1, LocalDate.now());

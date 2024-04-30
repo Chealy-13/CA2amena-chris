@@ -1,6 +1,7 @@
 import java.util.LinkedList;
+import java.util.List;
 
-public class HashMap {
+public class PatientHashMap {
     // Set up base internal map/array
     // Set up variable to track the number of elements/pairs
     private final LinkedList<Entry>[] map;
@@ -9,7 +10,7 @@ public class HashMap {
     /**
      * constructs an empty HashMap with an initial capacity of 103
      */
-    public HashMap(){
+    public PatientHashMap(){
         map = new LinkedList[103];
         count = 0;
     }
@@ -134,8 +135,20 @@ public class HashMap {
         return count;
     }
 
+    public LinkedList<Entry> getEntries(){
+        LinkedList<Entry> list = new LinkedList<Entry>();
+        for (LinkedList<Entry> entryLinkedList : map) {
+            if(entryLinkedList != null){
+                list.addAll(entryLinkedList);
+            }
 
-    private static class Entry{
+        }
+        return list;
+
+    }
+
+
+    public static class Entry{
         protected PatientId key;
         protected Patient value;
 
