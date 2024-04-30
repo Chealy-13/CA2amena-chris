@@ -4,11 +4,10 @@ import java.util.Scanner;
 public class App {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        HashMap patients = new HashMap();
+        PatientHashMap patients = new PatientHashMap();
 
 //Write a program that asks the user for:
 //• The upper bound to put on the queue.
-        //ToDo fix upperbound as it does not matter what number it is atm
         System.out.println("Enter the upper bound of the queue");
         int upperBound = sc.nextInt();
         sc.nextLine();
@@ -21,9 +20,10 @@ public class App {
 
 //        The program should then build the appropriate structures (there should be a queue for each doctor rostered that day). You may
 //        store the queues in a data structure if you wish, but you must build it yourself OR use an array (no use of the built-in structures).
-        BoundedPriorityQueue[] queues = new BoundedPriorityQueue[doctorsRostered.length];
+        DoctorAppointmentsHashMap appMap = new DoctorAppointmentsHashMap();
         for (int i = 0; i < doctorsRostered.length; i++) {
-            queues[i] = new BoundedPriorityQueue(upperBound, doctorsRostered[i].trim());
+            BoundedPriorityQueue queue = new BoundedPriorityQueue(upperBound, doctorsRostered[i].trim());
+            appMap.put(doctorsRostered[i].trim(), queue);
         }
 
 //        Once the program has finished the set up stage, it should repeatedly allow the user choose from the following options:
@@ -55,7 +55,6 @@ public class App {
                     LocalDate joinDate = LocalDate.now();
 
                     PatientId key = new PatientId(fName, sName, dob);
-//                    Patient patient = new Patient(fName, sName, dob, joinDate);
 
                     // check if the patient already exists in the HashMap
                     if (patients.containsKey(key)) {
@@ -91,10 +90,30 @@ public class App {
                     break;
                 case 3:
                     //• Display all patients
+                    for (PatientHashMap.Entry entry : patients.getEntries()) {
+                        System.out.println(entry.key.getfName()+" "+entry.key.getsName());
+                    }
+
                     break;
                 case 4:
                     //• Create a new appointment for a specific patient and add it to the queue (the appointment should be allocated a
                     //random triage level between 1 and 5)
+                    System.out.println("Enter The following details of the Appointment:");
+                    System.out.print("First Name: ");
+                    fName = sc.nextLine();
+                    System.out.print("Last Name: ");
+                    sName = sc.nextLine();
+                    System.out.print("Date of Birth(yyyy-mm-dd): ");
+                    dob = LocalDate.parse(sc.next());
+                    System.out.print("Issue: ");
+                    String issue = sc.nextLine();
+                    System.out.print("Triage Level: ");
+                    int triageLvl = sc.nextInt();
+                    System.out.print("Doctor Name: ");
+                    docName = sc.nextLine();
+
+                    Appointment newApp = new Appointment(fName, sName, dob, issue, triageLvl, docName);
+
                     break;
                 case 5:
                     //• Call the next patient in for a specified doctor (this should pull the next appointment from that doctor’s queue and
